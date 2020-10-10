@@ -1,8 +1,6 @@
 const http = require('http')
 const querystring = require('querystring')
 
-
-
 const server = http.createServer((req, res) => {
     if (req.method = 'POST') {
         //req数据格式
@@ -16,7 +14,6 @@ const server = http.createServer((req, res) => {
         req.on('end', () => {
             console.log('postData:', postData);
             res.end('hello word!')
-
         })
 
     }
