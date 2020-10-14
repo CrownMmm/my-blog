@@ -18,6 +18,27 @@ const getList = (author, keyword) => {
   ];
 };
 
+const getDetail = (id) => {
+  //先返回假数据
+  return [
+    {
+      id: 3,
+      title: "标题3",
+      content: "内容3",
+      createTime: 1546610493333,
+      author: "zhang",
+    },
+    {
+      id: 4,
+      title: "标题4",
+      content: "内容4",
+      createTime: 1546610524444,
+      author: "li",
+    },
+  ];
+}
+
 module.exports = {
   getList,
+  getDetail
 };
