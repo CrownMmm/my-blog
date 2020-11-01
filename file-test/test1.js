@@ -26,6 +26,6 @@ const fileName = path.resolve(__dirname, "data.txt");
 // });
 
 //判断文件是否存在
-fs.exists(fileName + 1, (exist) => {
-  console.log("exist", exist);
-});
+// fs.exists(fileName + 1, (exist) => {
+//   console.log("exist", exist);
+// });
