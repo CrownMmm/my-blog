@@ -1,7 +1,7 @@
 const redis = require("redis");
-const { REDIS_CONF } = require("../conf/db");
+const { REDIS_CONF } = require("../conf/db.js");
 
-//创建客户端
+// 创建客户端
 const redisClient = redis.createClient(REDIS_CONF.port, REDIS_CONF.host);
 redisClient.on("error", (err) => {
   console.error(err);
@@ -13,18 +13,19 @@ function set(key, val) {
   }
   redisClient.set(key, val, redis.print);
 }
+
 function get(key) {
-  const promise = new Promise((reslove, reject) => {
+  const promise = new Promise((resolve, reject) => {
     redisClient.get(key, (err, val) => {
       if (err) {
         reject(err);
         return;
       }
-      reslove(val);
       if (val == null) {
-        reslove(null);
+        resolve(null);
         return;
       }
+
       try {
         resolve(JSON.parse(val));
       } catch (ex) {
