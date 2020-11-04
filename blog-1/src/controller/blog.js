@@ -1,3 +1,4 @@
+const xss = require("xss")
 const { exec } = require("../db/mysql");
 
 //xxx.html ?k1=v1
@@ -18,7 +19,7 @@ const getList = (author, keyword) => {
 };
 
 const getDetail = (id) => {
-  console.log(id);
+  // console.log(id);
   const sql = `select * from blogs where id='${id}'`;
   return exec(sql).then((rows) => {
     return rows[0];
@@ -27,8 +28,9 @@ const getDetail = (id) => {
 
 const newBlog = (blogData = {}) => {
   // blogData是一个对象 包含title content
-  const title = blogData.title;
-  const content = blogData.content;
+  const title = xss(blogData.title)
+  // console.log('title is', title)
+  const content = xss(blogData.content)
   const author = blogData.author;
   const createTime = Date.now();
   const sql = `

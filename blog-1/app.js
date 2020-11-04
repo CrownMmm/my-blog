@@ -8,7 +8,7 @@ const handleUserRouter = require("./src/router/user");
 const getCookieExpires = () => {
   const d = new Date();
   d.setTime(d.getTime() + 24 * 60 * 60 * 1000);
-  console.log("d.toGMTString() is ", d.toGMTString());
+  // console.log("d.toGMTString() is ", d.toGMTString());
   return d.toGMTString();
 };
 
@@ -44,8 +44,7 @@ const getPostData = (req) => {
 const serverHandle = (req, res) => {
   // 记录 access log
   access(
-    `${req.method} -- ${req.url} -- ${
-      req.headers["user-agent"]
+    `${req.method} -- ${req.url} -- ${req.headers["user-agent"]
     } -- ${Date.now()}`
   );
 
