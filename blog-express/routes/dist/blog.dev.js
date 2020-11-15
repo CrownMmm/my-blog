@@ -22,7 +22,8 @@ router.get('/list', function (req, res, next) {
   var keyword = req.query.keyword || '';
 
   if (req.query.isadmin) {
-    // 管理员界面
+    console.log('is admin'); // 管理员界面
+
     if (req.session.username == null) {
       // 未登录
       res.json(new ErrorModel('未登录'));
