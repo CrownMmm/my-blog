@@ -51,8 +51,8 @@ function loginCheck(req, res, next) {
       msg: '登录失败'
     })
 
-    // console.log('模拟登陆成功')
-    // next()
+    console.log('模拟登陆成功')
+    next()
   })
 }
 
