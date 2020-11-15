@@ -13,8 +13,7 @@ router.get('/list', function (req, res, next) {
   let author = req.query.author || ''
   const keyword = req.query.keyword || ''
 
-  // if (req.query.isadmin) {
-  //   console.log('is admin')
+  if (req.query.isadmin) {
   //   // 管理员界面
   //   if (req.session.username == null) {
   //     console.error('is admin, but no login')
@@ -25,8 +24,8 @@ router.get('/list', function (req, res, next) {
   //     return
   //   }
     // 强制查询自己的博客
-  //   author = req.session.username
-  // }
+    author = req.session.username
+  }
 
   const result = getList(author, keyword)
   return result.then(listData => {
