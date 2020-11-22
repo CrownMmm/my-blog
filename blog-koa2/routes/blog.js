@@ -19,7 +19,6 @@ router.get('/list', async function (ctx, next) {
     console.log('is admin')
     // 管理员界面
     if (ctx.session.username == null) {
-      // 未登录
       console.error('is admin, but no login')
       // 未登录
       ctx.body = new ErrorModel('未登录')
@@ -34,16 +33,16 @@ router.get('/list', async function (ctx, next) {
 })
 
 router.get('/detail', async function (ctx, next) {
-  const data = getDetail(ctx.query.id)
+  const data = await getDetail(ctx.query.id)
   ctx.body = new SuccessModel(data)
-});
+})
 
 router.post('/new', loginCheck, async function (ctx, next) {
   const body = ctx.request.body
   body.author = ctx.session.username
   const data = await newBlog(body)
   ctx.body = new SuccessModel(data)
-});
+})
 
 router.post('/update', loginCheck, async function (ctx, next) {
   const val = await updateBlog(ctx.query.id, ctx.request.body)
@@ -63,4 +62,5 @@ router.post('/del', loginCheck, async function (ctx, next) {
     ctx.body = new ErrorModel('删除博客失败')
   }
 })
+
 module.exports = router

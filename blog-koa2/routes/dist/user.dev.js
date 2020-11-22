@@ -44,27 +44,15 @@ router.post('/login', function _callee(ctx, next) {
       }
     }
   });
-});
-router.get('/session-test', function _callee2(ctx, next) {
-  return regeneratorRuntime.async(function _callee2$(_context2) {
-    while (1) {
-      switch (_context2.prev = _context2.next) {
-        case 0:
-          if (ctx.session.viewCount == null) {
-            ctx.session.viewCount = 0;
-          }
+}); // router.get('/session-test', async function (ctx, next) {
+//   if (ctx.session.viewCount == null) {
+//     ctx.session.viewCount = 0
+//   }
+//   ctx.session.viewCount++
+//   ctx.body ={
+//     errno: 0,
+//     viewCount: ctx.session.viewCount
+//   }
+// })
 
-          ctx.session.viewCount++;
-          ctx.body = {
-            errno: 0,
-            viewCount: ctx.session.viewCount
-          };
-
-        case 3:
-        case "end":
-          return _context2.stop();
-      }
-    }
-  });
-});
 module.exports = router;

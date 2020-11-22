@@ -37,7 +37,6 @@ router.get('/list', function _callee(ctx, next) {
             break;
           }
 
-          // 未登录
           console.error('is admin, but no login'); // 未登录
 
           ctx.body = new ErrorModel('未登录');
@@ -68,10 +67,14 @@ router.get('/detail', function _callee2(ctx, next) {
     while (1) {
       switch (_context2.prev = _context2.next) {
         case 0:
-          data = getDetail(ctx.query.id);
-          ctx.body = new SuccessModel(data);
+          _context2.next = 2;
+          return regeneratorRuntime.awrap(getDetail(ctx.query.id));
 
         case 2:
+          data = _context2.sent;
+          ctx.body = new SuccessModel(data);
+
+        case 4:
         case "end":
           return _context2.stop();
       }

@@ -3,12 +3,12 @@
 var _require = require('../model/resModel'),
     ErrorModel = _require.ErrorModel;
 
-module.exports = function _callee(req, res, next) {
+module.exports = function _callee(ctx, next) {
   return regeneratorRuntime.async(function _callee$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
-          if (!req.session.username) {
+          if (!ctx.session.username) {
             _context.next = 4;
             break;
           }
