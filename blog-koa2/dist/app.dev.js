@@ -14,6 +14,10 @@ var bodyparser = require('koa-bodyparser');
 
 var logger = require('koa-logger');
 
+var session = require('koa-generic-session');
+
+var redisStore = require('koa-redis');
+
 var index = require('./routes/index');
 
 var users = require('./routes/users');
@@ -55,7 +59,23 @@ app.use(function _callee(ctx, next) {
       }
     }
   });
-}); // routes
+}); // session 配置
+
+app.keys = ['WJiol#23123_'];
+app.use(session({
+  // 配置 cookie
+  cookie: {
+    path: '/',
+    httpOnly: true,
+    maxAge: 24 * 60 * 60 * 1000
+  },
+  // 配置 redis
+  store: redisStore({
+    all: '127.0.0.1:6379' // 写死本地的 redis
+    // all: `${REDIS_CONF.host}:${REDIS_CONF.port}`
+
+  })
+})); // routes
 
 app.use(index.routes(), index.allowedMethods());
 app.use(users.routes(), users.allowedMethods());
