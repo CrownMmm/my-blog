@@ -24,7 +24,10 @@ var users = require('./routes/users');
 
 var blog = require('./routes/blog');
 
-var user = require('./routes/user'); // error handler
+var user = require('./routes/user');
+
+var _require = require('./conf/db'),
+    REDIS_CONF = _require.REDIS_CONF; // error handler
 
 
 onerror(app); // middlewares
@@ -71,9 +74,8 @@ app.use(session({
   },
   // 配置 redis
   store: redisStore({
-    all: '127.0.0.1:6379' // 写死本地的 redis
-    // all: `${REDIS_CONF.host}:${REDIS_CONF.port}`
-
+    // all: '127.0.0.1:6379'   // 写死本地的 redis
+    all: "".concat(REDIS_CONF.host, ":").concat(REDIS_CONF.port)
   })
 })); // routes
 
