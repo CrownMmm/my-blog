@@ -18,6 +18,12 @@ var session = require('koa-generic-session');
 
 var redisStore = require('koa-redis');
 
+var path = require('path');
+
+var fs = require('fs');
+
+var morgan = require('koa-morgan');
+
 var index = require('./routes/index');
 
 var users = require('./routes/users');
@@ -62,7 +68,23 @@ app.use(function _callee(ctx, next) {
       }
     }
   });
-}); // session 配置
+});
+var ENV = process.env.NODE_ENV;
+
+if (ENV !== 'production') {
+  // 开发环境 / 测试环境
+  app.use(morgan('dev'));
+} else {
+  // 线上环境
+  var logFileName = path.join(__dirname, 'logs', 'access.log');
+  var writeStream = fs.createWriteStream(logFileName, {
+    flags: 'a'
+  });
+  app.use(morgan('combined', {
+    stream: writeStream
+  }));
+} // session 配置
+
 
 app.keys = ['WJiol#23123_'];
 app.use(session({
